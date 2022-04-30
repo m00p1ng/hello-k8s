@@ -3,6 +3,13 @@ kind: Deployment
 metadata:
   name: hello-world
 spec:
+  replicas: 3
+  revisionHistoryLimit: 20
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   selector:
     matchLabels:
       app: hello-world
@@ -10,10 +17,12 @@ spec:
     metadata:
       labels:
         app: hello-world
+      annotations:
+        kubernetes.io/change-cause: "amigocode/kubernetes:hello-world-v2"
     spec:
       containers:
       - name: hello-world
-        image: amigoscode/kubernetes:hello-world
+        image: amigoscode/kubernetes:hello-world-v2
         resources:
           limits:
             memory: "128Mi"
