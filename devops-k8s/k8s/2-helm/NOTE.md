@@ -13,4 +13,9 @@ $ helm install -f email-service-values.yml emailservice microservice
 $ helm ls
 
 $ helm delete emailservice
+$ helm uninstall
+
+
+$ helmfile sync
+$ helmfile destroy
 ```
